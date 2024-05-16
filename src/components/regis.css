@@ -1,0 +1,50 @@
+.container {
+    width: 400px;
+    margin: 50px auto; /* Az oldal közepére igazítás */
+    padding: 20px;
+    border: 2px solid #ccc; /* Keret */
+    border-radius: 10px; /* Kerekített sarkok */
+    text-align: center; /* Tartalom középre igazítása */
+    background-color: #f9f9f9; /* Háttér */
+  }
+  
+  h2 {
+    color: #337ab7; /* A címsor színe */
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+    text-align: left; /* Szöveg balra igazítása */
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: calc(100% - 20px); /* Teljes szélesség - 20px padding a jobb oldalon */
+    padding: 5px;
+    box-sizing: border-box; /* A padding beleszámít a szélességbe */
+    margin-bottom: 10px; /* Térköz a mezők között */
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #337ab7;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px; /* Térköz a gombok és az előző mező között */
+  }
+  
+  button:last-child {
+    margin-top: 10px; /* Az utolsó gombnak kisebb térköz a következő elemhez */
+  }
+  
+  button:hover {
+    background-color: #286090;
+  }
+  

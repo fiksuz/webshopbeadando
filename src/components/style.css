@@ -1,0 +1,63 @@
+.navbar {
+    background-color: #0b0c10; /* Háttérszín beállítása */
+}
+.navigacio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.navigacio .jobb-oldal {
+    display: flex;
+    align-items: center;
+}
+
+.navigacio ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navigacio ul li {
+    list-style: none;
+    margin-left: 30px;
+}
+
+.navigacio ul li a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.navigacio ul li a.active,
+.navigacio ul li a:hover {
+    color: #66fcf1;
+}
+
+.profil {
+    margin-right: 40px; 
+    
+}
+.profil,
+.kosar {
+    position: absolute;
+    right: 20px; 
+    font-size: 20px; 
+}
+
+.profil a,
+.kosar a {
+    color: #66fcf1; 
+}
+
+.navbar-brand span {
+    color: #66fcf1; /* Példa szín */
+}
+  
+.navbar {
+    color: #0b0c10;
+}
