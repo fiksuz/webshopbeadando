@@ -1,50 +1,73 @@
+/* Alap stílusok */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
 .container {
-    width: 400px;
-    margin: 50px auto; /* Az oldal közepére igazítás */
-    padding: 20px;
-    border: 2px solid #ccc; /* Keret */
-    border-radius: 10px; /* Kerekített sarkok */
-    text-align: center; /* Tartalom középre igazítása */
-    background-color: #f9f9f9; /* Háttér */
-  }
-  
-  h2 {
-    color: #337ab7; /* A címsor színe */
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 10px;
-    text-align: left; /* Szöveg balra igazítása */
-  }
-  
-  input[type="text"],
-  input[type="password"] {
-    width: calc(100% - 20px); /* Teljes szélesség - 20px padding a jobb oldalon */
-    padding: 5px;
-    box-sizing: border-box; /* A padding beleszámít a szélességbe */
-    margin-bottom: 10px; /* Térköz a mezők között */
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #337ab7;
-    border: none;
-    color: white;
-    cursor: pointer;
-    margin-top: 20px; /* Térköz a gombok és az előző mező között */
-  }
-  
-  button:last-child {
-    margin-top: 10px; /* Az utolsó gombnak kisebb térköz a következő elemhez */
-  }
-  
-  button:hover {
-    background-color: #286090;
-  }
-  
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="checkbox"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form input[type="checkbox"] {
+  width: auto;
+  margin-bottom: 10px;
+}
+
+form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* Extra stílusok a számlázási és szállítási címekhez */
+h3 {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.shipping-address {
+  margin-top: 20px;
+}
+
+.shipping-address label {
+  margin-top: 10px;
+}
+
+.shipping-address input {
+  margin-bottom: 10px;
+}
