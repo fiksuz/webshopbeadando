@@ -1,87 +1,66 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Profile.css';
+import React, { useState, useEffect } from "react";
 
-interface User {
-    firstName: string;
-    lastName: string;
-    email: string;
+interface UserData {
+  last_name: string;
+  first_name: string;
+  email: string;
 }
 
-const Profile: React.FC = () => {
-    const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const navigate = useNavigate();
+function App() {
+  const [user, setUser] = useState<UserData | null>(null);
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            navigate('/bejelentkezés');
-            return;
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const fetchUser = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/user", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
         }
-
-        const fetchUserData = async () => {
-            try {
-                const response = await fetch('http://localhost:5000/user', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-
-                if (!response.ok) {
-                    if (response.status === 401 || response.status === 403) {
-                        // Unauthorized or Forbidden
-                        localStorage.removeItem('token');
-                        navigate('/bejelentkezés');
-                    } else {
-                        throw new Error('Failed to fetch user data. Status: ' + response.status);
-                    }
-                } else {
-                    const data: User = await response.json();
-                    setUser(data);
-                }
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-                setError('Error fetching user data');
-                localStorage.removeItem('token');
-                navigate('/bejelentkezés');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchUserData();
-    }, [navigate]);
-
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        navigate('/bejelentkezés');
-    };
-
-    if (loading) {
-        return <div>Loading...</div>;
+      });
+      const userData = await response.json();
+      setUser(userData);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      // Ide jönne a hiba kezelése, például átirányítás a bejelentkezési oldalra
     }
+  };
 
-    if (error) {
-        return <div>{error}</div>;
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      if (response.ok) {
+        setUser(null);
+        localStorage.removeItem("token");
+      } else {
+        console.error("Logout failed");
+      }
+    } catch (error) {
+      console.error("Error logging out:", error);
     }
+  };
 
-    if (!user) {
-        return <div>Error loading user data.</div>;
-    }
-
-    return (
-        <div className="profile-container">
-            <h2>Profile</h2>
-            <div className="profile-info">
-                <p><strong>First Name:</strong> {user.firstName}</p>
-                <p><strong>Last Name:</strong> {user.lastName}</p>
-                <p><strong>Email:</strong> {user.email}</p>
-            </div>
-            <button onClick={handleLogout}>Logout</button>
+  return (
+    <div>
+      {user ? (
+        <div>
+          <p>Last Name: {user.last_name}</p>
+          <p>First Name: {user.first_name}</p>
+          <p>Email: {user.email}</p>
+          <button onClick={handleLogout}>Logout</button>
         </div>
-    );
-};
+      ) : (
+        <p>Please log in</p>
+      )}
+    </div>
+  );
+}
 
-export default Profile;
+export default App;
