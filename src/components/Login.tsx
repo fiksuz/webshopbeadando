@@ -25,7 +25,8 @@ const Login: React.FC = () => {
       }
 
       const data = await response.json();
-      localStorage.setItem("token", data.token);
+      console.log(data);
+      localStorage.setItem("accessToken", data.accessToken);
       navigate("/profil");
     } catch (error) {
       setError("Failed to log in");
@@ -33,11 +34,11 @@ const Login: React.FC = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
     navigate("/bejelentkezés");
   };
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   if (token) {
     return (
       <div className="login-container">

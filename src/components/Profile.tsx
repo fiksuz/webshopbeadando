@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 interface UserData {
-  last_name: string;
-  first_name: string;
+  lastName: string;
+  firstName: string;
   email: string;
 }
 
@@ -17,14 +17,14 @@ function App() {
     try {
       const response = await fetch("http://localhost:5000/user", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
         }
       });
       const userData = await response.json();
       setUser(userData);
     } catch (error) {
       console.error("Error fetching user data:", error);
-      // Ide jönne a hiba kezelése, például átirányítás a bejelentkezési oldalra
+      
     }
   };
 
@@ -33,12 +33,12 @@ function App() {
       const response = await fetch("http://localhost:5000/logout", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
         }
       });
       if (response.ok) {
         setUser(null);
-        localStorage.removeItem("token");
+        localStorage.removeItem("accessToken");
       } else {
         console.error("Logout failed");
       }
@@ -47,14 +47,17 @@ function App() {
     }
   };
 
+
+
   return (
     <div>
       {user ? (
         <div>
-          <p>Last Name: {user.last_name}</p>
-          <p>First Name: {user.first_name}</p>
+          <p>Last Name: {user.lastName}</p>
+          <p>First Name: {user.firstName}</p>
           <p>Email: {user.email}</p>
           <button onClick={handleLogout}>Logout</button>
+          
         </div>
       ) : (
         <p>Please log in</p>
