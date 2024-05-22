@@ -23,7 +23,7 @@ const ProfileChange: React.FC<ProfileChangeProps> = ({ isOpen, onClose }) => {
 
     const fetchUserData = async () => {
       try {
-        const response = await fetch('/user', {
+        const response = await fetch('http://localhost:5000/user', {
           headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
         });
 
