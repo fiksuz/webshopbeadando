@@ -57,6 +57,7 @@ function App() {
           <p>First Name: {user.firstName}</p>
           <p>Email: {user.email}</p>
           <button onClick={handleLogout}>Logout</button>
+          <button>Adatok módosítása</button>
           
         </div>
       ) : (

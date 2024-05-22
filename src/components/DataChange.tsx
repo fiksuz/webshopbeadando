@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useAuthValid from '../auth/useAuthValid';
 
 interface User {
@@ -14,7 +14,7 @@ interface ProfileChangeProps {
 
 const ProfileChange: React.FC<ProfileChangeProps> = ({ isOpen, onClose }) => {
   useAuthValid();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [user, setUser] = useState<User>({ firstName: '', lastName: '' });
   const [error, setError] = useState<string>('');
 
@@ -29,7 +29,7 @@ const ProfileChange: React.FC<ProfileChangeProps> = ({ isOpen, onClose }) => {
 
         if (response.status === 401) {
           localStorage.removeItem('accessToken');
-          history.push('/login');
+          navigate('/login');
           return;
         }
 
@@ -45,7 +45,7 @@ const ProfileChange: React.FC<ProfileChangeProps> = ({ isOpen, onClose }) => {
     };
 
     fetchUserData();
-  }, [history, isOpen]);
+  }, [navigate, isOpen]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -72,7 +72,7 @@ const ProfileChange: React.FC<ProfileChangeProps> = ({ isOpen, onClose }) => {
 
       if (response.status === 401) {
         localStorage.removeItem('accessToken');
-        history.push('/login');
+        navigate('/login');
         return;
       }
 
