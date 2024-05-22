@@ -6,6 +6,8 @@ import Registration from './components/Registration';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "bootstrap/dist/css/bootstrap.css";
+import Login from './components/Login';
+import Profile from './components/Profile';
 
 
 function App() {
@@ -14,10 +16,12 @@ function App() {
   return (
     
       <Router>
-        <NavBar brandName={"Webshop"} items={navItems} />
+        <NavBar brandName={"Webshop"} items={navItems}  />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path='/regisztracio' element={<Registration/>} />
+        <Route path="/bejelentkezés" element={<Login />} />
+        <Route path="/regisztracio" element={<Registration />} />
+        <Route path="/profil" element={<Profile />} />
+        <Route path="/" element={<Home />} />
         </Routes>
       </Router>
     
