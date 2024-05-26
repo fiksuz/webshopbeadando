@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import './style.css'
+import '../components/css/style.css'
 
 interface NavBarProps {
     brandName: string;
@@ -24,7 +24,9 @@ function NavBar({ brandName, items }: NavBarProps) {
                           <NavLink to="/">{item}</NavLink>
                       ) : item === 'Regisztráció' ? (
                           <NavLink to="/regisztracio">{item}</NavLink>
-                      ) : (
+                      ) :  item === 'Keresés' ? (
+                        <NavLink to="/kereses">{item}</NavLink>
+                    ) :(
                           <NavLink to={"/" + item.toLowerCase()}>{item}</NavLink>
                       )}
                   </li>

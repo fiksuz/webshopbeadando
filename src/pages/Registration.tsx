@@ -1,6 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import "./regis.css";
-import { Console } from "console";
+import React, { useState, useEffect } from "react";
+import "../components/css/regis.css";
 
 const RegistrationForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -27,6 +26,7 @@ const RegistrationForm: React.FC = () => {
     },
   });
 
+  const [sameAddress, setSameAddress] = useState(false);
 
   const handleReset = () => {
     setFormData({
@@ -52,32 +52,45 @@ const RegistrationForm: React.FC = () => {
         taxNumber: "",
       },
     });
+    setSameAddress(false);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, dataset } = e.target;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked, dataset } = e.target;
     const addressType = dataset.addressType;
 
-    switch (addressType) {
-      case "shippingAddress":
-      case "billingAddress":
-        setFormData((prevState) => ({
-          ...prevState,
-          [addressType]: {
-            ...prevState[addressType],
-            [name]: value,
-          },
-        }));
-        break;
-      default:
-        setFormData((prevState) => ({
-          ...prevState,
-          [name]: value,
-        }));
-        break;
+    if (name === "sameAddress") {
+      setSameAddress(checked);
+    } else {
+      switch (addressType) {
+        case "shippingAddress":
+        case "billingAddress":
+          setFormData((prevState) => ({
+            ...prevState,
+            [addressType]: {
+              ...prevState[addressType],
+              [name]: value,
+            },
+          }));
+          break;
+        default:
+          setFormData((prevState) => ({
+            ...prevState,
+            [name]: type === "checkbox" ? checked : value,
+          }));
+          break;
+      }
     }
   };
- 
+
+  useEffect(() => {
+    if (sameAddress) {
+      setFormData((prevState) => ({
+        ...prevState,
+        shippingAddress: { ...prevState.billingAddress, phoneNumber: prevState.shippingAddress.phoneNumber }
+      }));
+    }
+  }, [sameAddress, formData.billingAddress]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -89,7 +102,6 @@ const RegistrationForm: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify(formData),
       });
 
@@ -133,7 +145,6 @@ const RegistrationForm: React.FC = () => {
             value={formData.username}
             onChange={handleChange}
             required
-            //pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             autoComplete="username"
           />
 
@@ -157,7 +168,16 @@ const RegistrationForm: React.FC = () => {
             autoComplete="current-password"
           />
 
-          <label htmlFor="firstName">Keresztnév</label>
+          <label htmlFor="lastName">Vezetéknév:</label>
+          <input
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+          />
+
+          <label htmlFor="firstName">Keresztnév:</label>
           <input
             type="text"
             name="firstName"
@@ -166,128 +186,131 @@ const RegistrationForm: React.FC = () => {
             required
           />
         </div>
-        <label htmlFor="lastName">Vezetéknév</label>
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-          required
-        />
 
-        <div className="shipping-info">
-          <h3>Szállítási cím</h3>
-          <label htmlFor="shippingName">Név:</label>
+        <div className="billing-info">
+          <h3>Számlázási cím</h3>
+          <label htmlFor="billingName">Név:</label>
           <input
             type="text"
             name="name"
-            data-address-type="shippingAddress"
-            value={formData.shippingAddress.name}
+            data-address-type="billingAddress"
+            value={formData.billingAddress.name}
             onChange={handleChange}
+            required
           />
-          <label htmlFor="shippingCountry">Ország:</label>
+          <label htmlFor="billingCountry">Ország:</label>
           <input
             type="text"
             name="country"
-            data-address-type="shippingAddress"
-            value={formData.shippingAddress.country}
+            data-address-type="billingAddress"
+            value={formData.billingAddress.country}
             onChange={handleChange}
+            required
           />
-          <label htmlFor="shippingCity">Város:</label>
+
+          <label htmlFor="billingCity">Város:</label>
           <input
             type="text"
             name="city"
-            data-address-type="shippingAddress"
-            value={formData.shippingAddress.city}
+            data-address-type="billingAddress"
+            value={formData.billingAddress.city}
             onChange={handleChange}
+            required
           />
-          <label htmlFor="shippingStreet">Utca:</label>
+
+          <label htmlFor="billingStreet">Utca:</label>
           <input
             type="text"
             name="street"
-            data-address-type="shippingAddress"
-            value={formData.shippingAddress.street}
+            data-address-type="billingAddress"
+            value={formData.billingAddress.street}
             onChange={handleChange}
+            required
           />
-          <label htmlFor="shippingZip">Irányítószám:</label>
+
+          <label htmlFor="billingZip">Irányítószám:</label>
           <input
             type="text"
             name="zip"
-            data-address-type="shippingAddress"
-            value={formData.shippingAddress.zip}
+            data-address-type="billingAddress"
+            value={formData.billingAddress.zip}
             onChange={handleChange}
+            required
           />
-          <label htmlFor="shippingPhoneNumber">Telefonszám:</label>
+
+          <label htmlFor="billingPhoneNumber">Adószám:</label>
           <input
             type="text"
-            name="phoneNumber"
-            data-address-type="shippingAddress"
-            value={formData.shippingAddress.phoneNumber}
+            name="taxNumber"
+            data-address-type="billingAddress"
+            value={formData.billingAddress.taxNumber}
             onChange={handleChange}
           />
         </div>
 
-          <div className="billing-info">
-            <h3>Számlázási cím</h3>
-            <label htmlFor="billingName">Név:</label>
+        <label>
+          <input
+            type="checkbox"
+            name="sameAddress"
+            checked={sameAddress}
+            onChange={handleChange}
+          />
+          A számlázási cím megegyezik a szállítási címmel
+        </label>
+
+        {!sameAddress && (
+          <div className="shipping-info">
+            <h3>Szállítási cím</h3>
+            <label htmlFor="shippingName">Név:</label>
             <input
               type="text"
               name="name"
-              data-address-type="billingAddress"
-              value={formData.billingAddress.name}
+              data-address-type="shippingAddress"
+              value={formData.shippingAddress.name}
               onChange={handleChange}
-              required
             />
-            <label htmlFor="billingCountry">Ország:</label>
+            <label htmlFor="shippingCountry">Ország:</label>
             <input
               type="text"
               name="country"
-              data-address-type="billingAddress"
-              value={formData.billingAddress.country}
+              data-address-type="shippingAddress"
+              value={formData.shippingAddress.country}
               onChange={handleChange}
-              required
             />
-
-            <label htmlFor="billingCity">Város:</label>
+            <label htmlFor="shippingCity">Város:</label>
             <input
               type="text"
               name="city"
-              data-address-type="billingAddress"
-              value={formData.billingAddress.city}
+              data-address-type="shippingAddress"
+              value={formData.shippingAddress.city}
               onChange={handleChange}
-              required
             />
-
-            <label htmlFor="billingStreet">Utca:</label>
+            <label htmlFor="shippingStreet">Utca:</label>
             <input
               type="text"
               name="street"
-              data-address-type="billingAddress"
-              value={formData.billingAddress.street}
+              data-address-type="shippingAddress"
+              value={formData.shippingAddress.street}
               onChange={handleChange}
-              required
             />
-
-            <label htmlFor="billingZip">Irányítószám:</label>
+            <label htmlFor="shippingZip">Irányítószám:</label>
             <input
               type="text"
               name="zip"
-              data-address-type="billingAddress"
-              value={formData.billingAddress.zip}
+              data-address-type="shippingAddress"
+              value={formData.shippingAddress.zip}
               onChange={handleChange}
-              required
             />
-
-            <label htmlFor="billingTaxNumber">Tax:</label>
+            <label htmlFor="shippingPhoneNumber">Telefonszám:</label>
             <input
               type="text"
-              name="taxNumber"
-              data-address-type="billingAddress"
-              value={formData.billingAddress.taxNumber}
+              name="phoneNumber"
+              data-address-type="shippingAddress"
+              value={formData.shippingAddress.phoneNumber}
               onChange={handleChange}
             />
           </div>
-        
+        )}
 
         <div className="buttons">
           <button type="submit">Regisztráció</button>

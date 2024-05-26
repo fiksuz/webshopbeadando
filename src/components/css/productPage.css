@@ -1,0 +1,38 @@
+.main-container {
+    padding: 20px;
+  }
+  
+  .product-data {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .product-data img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .product-data h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .product-data p {
+    margin-bottom: 10px;
+  }
+  
+  .product-data .categories ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .product-data .categories ul li {
+    margin-bottom: 5px;
+  }
+  
+  .product-data .categories ul li a {
+    text-decoration: none;
+    color: blue;
+  }
+  

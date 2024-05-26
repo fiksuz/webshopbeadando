@@ -1,30 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthValid from '../auth/useAuthValid';
+import '../components/css/DataChange.css';
 
+// User típusdefiníciója
 interface User {
   firstName: string;
   lastName: string;
 }
 
+// ProfileChangeProps típusdefiníciója
 interface ProfileChangeProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const ProfileChange: React.FC<ProfileChangeProps> = ({ isOpen, onClose }) => {
+// ProfileChange komponens
+const ProfileChange: React.FC = () => {
+  // Auth ellenőrzése
   useAuthValid();
   const navigate = useNavigate();
+
+  // Felhasználó állapota
   const [user, setUser] = useState<User>({ firstName: '', lastName: '' });
+
+  // Hibák állapota
   const [error, setError] = useState<string>('');
 
+  // Felhasználó adatának lekérése
   useEffect(() => {
-    if (!isOpen) return;
-
     const fetchUserData = async () => {
       try {
         const response = await fetch('http://localhost:5000/user', {
-          headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          }
         });
 
         if (response.status === 401) {
@@ -45,13 +55,15 @@ const ProfileChange: React.FC<ProfileChangeProps> = ({ isOpen, onClose }) => {
     };
 
     fetchUserData();
-  }, [navigate, isOpen]);
+  }, [navigate]);
 
+  // Input változás kezelése
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUser(prevState => ({ ...prevState, [name]: value }));
   };
 
+  // Űrlap elküldése
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -61,7 +73,7 @@ const ProfileChange: React.FC<ProfileChangeProps> = ({ isOpen, onClose }) => {
     }
 
     try {
-      const response = await fetch('/user', {
+      const response = await fetch('http://localhost:5000/user', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -88,47 +100,41 @@ const ProfileChange: React.FC<ProfileChangeProps> = ({ isOpen, onClose }) => {
       const data: User = await response.json();
       setUser(data);
       setError('');
-      onClose();
     } catch (err) {
       console.error('Modification error:', err);
       setError('Failed to modify');
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <h1>Profile Change</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>
-              First Name:
-              <input
-                type="text"
-                name="firstName"
-                value={user.firstName}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              Last Name:
-              <input
-                type="text"
-                name="lastName"
-                value={user.lastName}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          <button type="submit">Save</button>
-          <button type="button" onClick={onClose}>Cancel</button>
-        </form>
-      </div>
+    <div className="profile-change-container">
+      <h1>Profile Change</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>
+            First Name:
+            <input
+              type="text"
+              name="firstName"
+              value={user.firstName}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Last Name:
+            <input
+              type="text"
+              name="lastName"
+              value={user.lastName}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        {error && <p className="error-message">{error}</p>}
+        <button type="submit">Save</button>
+      </form>
     </div>
   );
 };
