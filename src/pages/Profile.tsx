@@ -36,8 +36,11 @@ const App: React.FC = () => {
 
   const handleLogout = () => {
     setUser(null); // A felhasználói állapot törlése
-    localStorage.removeItem("accessToken"); // A tokent eltávolítjuk a helyi tárolóból
+    localStorage.removeItem("accessToken");
+    window.location.reload(); // Az oldal újratöltése
   };
+  
+  
 
   return (
     <div>

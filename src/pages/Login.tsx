@@ -30,6 +30,14 @@ const Login: React.FC = () => {
       localStorage.setItem("accessToken", data.accessToken);
       setIsLoggedIn(true);
       navigate("/profil");
+      await new Promise<void>((resolve) => {
+        window.location.reload();
+        
+        resolve();
+        
+      });
+      
+      
     } catch (error) {
       setError("Failed to log in");
     }
