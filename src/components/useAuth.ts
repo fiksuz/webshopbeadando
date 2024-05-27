@@ -1,15 +1,20 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const useAuth = () => {
-  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login');
+    const token = localStorage.getItem('accessToken'); // Frissítettük a tokent
+    console.log('Token:', token);
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
     }
-  }, [navigate]);
+    console.log('Is Logged In:', isLoggedIn);
+  }, []);
+
+  return isLoggedIn;
 };
 
 export default useAuth;

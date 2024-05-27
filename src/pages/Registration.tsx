@@ -87,10 +87,11 @@ const RegistrationForm: React.FC = () => {
     if (sameAddress) {
       setFormData((prevState) => ({
         ...prevState,
-        shippingAddress: { ...prevState.billingAddress, phoneNumber: prevState.shippingAddress.phoneNumber }
+        billingAddress: { ...prevState.billingAddress, ...prevState.shippingAddress }
       }));
     }
-  }, [sameAddress, formData.billingAddress]);
+  }, [sameAddress]);
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -187,126 +188,126 @@ const RegistrationForm: React.FC = () => {
           />
         </div>
 
-        <div className="billing-info">
-          <h3>Számlázási cím</h3>
-          <label htmlFor="billingName">Név:</label>
+        <div className="shipping-info">
+          <h3>Szállítási cím</h3>
+          <label htmlFor="shippingName">Név:</label>
           <input
             type="text"
             name="name"
-            data-address-type="billingAddress"
-            value={formData.billingAddress.name}
+            data-address-type="shippingAddress"
+            value={formData.shippingAddress.name}
             onChange={handleChange}
-            required
           />
-          <label htmlFor="billingCountry">Ország:</label>
+          <label htmlFor="shippingCountry">Ország:</label>
           <input
             type="text"
             name="country"
-            data-address-type="billingAddress"
-            value={formData.billingAddress.country}
+            data-address-type="shippingAddress"
+            value={formData.shippingAddress.country}
             onChange={handleChange}
-            required
           />
-
-          <label htmlFor="billingCity">Város:</label>
+          <label htmlFor="shippingCity">Város:</label>
           <input
             type="text"
             name="city"
-            data-address-type="billingAddress"
-            value={formData.billingAddress.city}
+            data-address-type="shippingAddress"
+            value={formData.shippingAddress.city}
             onChange={handleChange}
-            required
           />
-
-          <label htmlFor="billingStreet">Utca:</label>
+          <label htmlFor="shippingStreet">Utca:</label>
           <input
             type="text"
             name="street"
-            data-address-type="billingAddress"
-            value={formData.billingAddress.street}
+            data-address-type="shippingAddress"
+            value={formData.shippingAddress.street}
             onChange={handleChange}
-            required
           />
-
-          <label htmlFor="billingZip">Irányítószám:</label>
+          <label htmlFor="shippingZip">Irányítószám:</label>
           <input
             type="text"
             name="zip"
-            data-address-type="billingAddress"
-            value={formData.billingAddress.zip}
+            data-address-type="shippingAddress"
+            value={formData.shippingAddress.zip}
             onChange={handleChange}
-            required
           />
-
-          <label htmlFor="billingPhoneNumber">Adószám:</label>
+          <label htmlFor="shippingPhoneNumber">Telefonszám:</label>
           <input
             type="text"
-            name="taxNumber"
-            data-address-type="billingAddress"
-            value={formData.billingAddress.taxNumber}
+            name="phoneNumber"
+            data-address-type="shippingAddress"
+            value={formData.shippingAddress.phoneNumber}
             onChange={handleChange}
           />
         </div>
 
         <label>
+          A számlázási cím megegyezik a szállítási címmel{' '}
           <input
             type="checkbox"
             name="sameAddress"
             checked={sameAddress}
             onChange={handleChange}
           />
-          A számlázási cím megegyezik a szállítási címmel
         </label>
 
         {!sameAddress && (
-          <div className="shipping-info">
-            <h3>Szállítási cím</h3>
-            <label htmlFor="shippingName">Név:</label>
+          <div className="billing-info">
+            <h3>Számlázási cím</h3>
+            <label htmlFor="billingName">Név:</label>
             <input
               type="text"
               name="name"
-              data-address-type="shippingAddress"
-              value={formData.shippingAddress.name}
+              data-address-type="billingAddress"
+              value={formData.billingAddress.name}
               onChange={handleChange}
+              required
             />
-            <label htmlFor="shippingCountry">Ország:</label>
+            <label htmlFor="billingCountry">Ország:</label>
             <input
               type="text"
               name="country"
-              data-address-type="shippingAddress"
-              value={formData.shippingAddress.country}
+              data-address-type="billingAddress"
+              value={formData.billingAddress.country}
               onChange={handleChange}
+              required
             />
-            <label htmlFor="shippingCity">Város:</label>
+
+            <label htmlFor="billingCity">Város:</label>
             <input
               type="text"
               name="city"
-              data-address-type="shippingAddress"
-              value={formData.shippingAddress.city}
+              data-address-type="billingAddress"
+              value={formData.billingAddress.city}
               onChange={handleChange}
+              required
             />
-            <label htmlFor="shippingStreet">Utca:</label>
+
+            <label htmlFor="billingStreet">Utca:</label>
             <input
               type="text"
               name="street"
-              data-address-type="shippingAddress"
-              value={formData.shippingAddress.street}
+              data-address-type="billingAddress"
+              value={formData.billingAddress.street}
               onChange={handleChange}
+              required
             />
-            <label htmlFor="shippingZip">Irányítószám:</label>
+
+            <label htmlFor="billingZip">Irányítószám:</label>
             <input
               type="text"
               name="zip"
-              data-address-type="shippingAddress"
-              value={formData.shippingAddress.zip}
+              data-address-type="billingAddress"
+              value={formData.billingAddress.zip}
               onChange={handleChange}
+              required
             />
-            <label htmlFor="shippingPhoneNumber">Telefonszám:</label>
+
+            <label htmlFor="billingPhoneNumber">Adószám:</label>
             <input
               type="text"
-              name="phoneNumber"
-              data-address-type="shippingAddress"
-              value={formData.shippingAddress.phoneNumber}
+              name="taxNumber"
+              data-address-type="billingAddress"
+              value={formData.billingAddress.taxNumber}
               onChange={handleChange}
             />
           </div>
@@ -320,5 +321,4 @@ const RegistrationForm: React.FC = () => {
     </div>
   );
 };
-
 export default RegistrationForm;

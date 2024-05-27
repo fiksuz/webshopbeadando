@@ -7,6 +7,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ const Login: React.FC = () => {
       const data = await response.json();
       console.log(data);
       localStorage.setItem("accessToken", data.accessToken);
+      setIsLoggedIn(true);
       navigate("/profil");
     } catch (error) {
       setError("Failed to log in");
@@ -35,6 +37,7 @@ const Login: React.FC = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
+    setIsLoggedIn(false);
     navigate("/bejelentkezés");
   };
 

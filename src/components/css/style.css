@@ -1,12 +1,8 @@
-.navbar {
-    background-color: #0b0c10;
-}
 .navigacio {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 
 .navigacio .jobb-oldal {
     display: flex;
@@ -27,7 +23,7 @@
 
 .navigacio ul li a {
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     font-size: 16px;
     font-weight: 500;
     transition: 0.3s ease;
@@ -35,13 +31,13 @@
 
 .navigacio ul li a.active,
 .navigacio ul li a:hover {
-    color: #66fcf1;
+    color: #66b539;
 }
 
 .profil {
     margin-right: 40px; 
-    
 }
+
 .profil,
 .kosar {
     position: absolute;
@@ -51,13 +47,11 @@
 
 .profil a,
 .kosar a {
-    color: #66fcf1; 
+    color: #66b539; 
 }
 
 .navbar-brand span {
-    color: #66fcf1; /* Példa szín */
-}
-  
-.navbar {
-    color: #0b0c10;
+    color: #66b539; 
+    font-size: 24px; /* vagy a kívánt méret */
+    font-weight: bold; /* ha szükséges */
 }

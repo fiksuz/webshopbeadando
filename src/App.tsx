@@ -20,7 +20,7 @@ function App() {
       <NavBar brandName={"Webshop"} items={navItems} />
       <Routes>
         <Route path="/bejelentkezés" element={<Login />} />
-        <Route path="/regisztracio" element={<Registration />} />
+        <Route path="/regisztráció" element={<Registration />} />
         <Route path="/profil" element={<Profile />} />
         <Route path="/" element={<Home />} />
         <Route path="/update" element={<ProfileChange />} />

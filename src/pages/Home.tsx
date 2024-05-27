@@ -38,18 +38,18 @@ const HOME: React.FC = () => {
     }
   };
   return (
-    <div style={{ backgroundColor: '#1f2833' }}>
-      <h2 >Termékkategóriák</h2>
-      <div className="category-container">
-        {categories.map((category) => (
-          <div className="category-item" key={category.id}>
-            <img src={category.image} alt={category.name} />
-            <p>{category.name}</p>
-            <p>Elérhető termékek száma: {category.productCount}</p>
-          </div>
-        ))}
-      </div>
+    <div className="home-background">
+    <h2 className="title">Termékkategóriák</h2>
+    <div className="category-container">
+      {categories.map((category) => (
+        <div className="category-item" key={category.id}>
+          <img src={category.image} alt={category.name} />
+          <p>{category.name}</p>
+          <p className="product-count">Elérhető termékek száma: {category.productCount}</p>
+        </div>
+      ))}
     </div>
+  </div>
   );
 };
 

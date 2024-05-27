@@ -1,40 +1,62 @@
 .home-background {
-    background-color: #1f2833; 
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f4; /* Szürke háttérszín */
+}
+
+.title {
+  font-size: 42px;
+  color: #797e77; /* Zöld szín */
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  margin: 0 0 20px 0;
+  border-bottom: 4px solid #66b539; /* Zöld vonal a cím alatt */
+}
+
 .category-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 60px;
-    justify-content: center;
-   
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px; /* távolság a kategóriák között */
+  justify-content: center;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.category-item {
+  width: calc(33.33% - 40px); /* A kategória elem szélessége: 33.33% - a távolság szélessége */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Kép és szöveg középre igazítása */
+  justify-content: center;
+  margin-bottom: 40px; /* távolság a kategóriák alatt */
+}
+
+@media (max-width: 1200px) {
   .category-item {
-    width: calc(33.333% - 40px);
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: calc(50% - 40px); /* Kisebb képernyőknél két kategória elem férjen el egy sorban */
   }
-  
-  .category-item img {
-    width: 100%;
-    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .category-item {
+    width: calc(100% - 40px); /* Mobil nézetben egy kategória elem teljes szélességben legyen */
   }
-  
-  .category-item p {
-    margin: 10px 0;
-    font-size: 20px;
-    text-align: center;
-    color: #ccc;
-  }
-  
-  h2 {
-    text-align: center;
-    font-style: italic;
-    color: #ffffff !important;
-    margin-bottom: 30px;
-  }
-  
+}
+
+
+.category-item img {
+  width: 80%; /* A kép szélessége a konténer 80%-a */
+  height: auto; /* Automatikus magasság beállítás az arányok megtartásához */
+  border-radius: 20px; /* Kerekített sarkok */
+}
+
+.category-item p {
+  margin-top: 10px;
+  font-size: 16px; /* Kis szöveg méret */
+  text-align: center; /* Szöveg középre igazítása */
+  color: #646363;
+}

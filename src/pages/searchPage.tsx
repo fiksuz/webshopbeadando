@@ -98,13 +98,13 @@ const SEARCHPAGE = () => {
     <div className='search-results-container'>
       {products.length > 0 ? (
           products.map((product) => (
-            <div key={product.id} className='product'>
+            <a key={product.id} className='product' href={"http://localhost:3000/products/" +product.id}>
               <img src={product.image} />
               <h3>{product.name}</h3>
               <p>Price: {product.price}</p>
               <p>Rating: {product.rating}/5</p>
               <p>{product.stock > 0 ? 'Stock: ' + product.stock + ' products' : 'Not in stock'}</p>
-            </div>
+            </a>
           ))
         ) : (
           <p>No results found</p>

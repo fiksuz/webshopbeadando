@@ -1,49 +1,54 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import '../components/css/style.css'
+import { faShoppingBasket, faUser } from '@fortawesome/free-solid-svg-icons';
+import useAuth from './useAuth';
+import '../components/css/style.css';
 
 interface NavBarProps {
     brandName: string;
     items: string[];
 }
 
-function NavBar({ brandName, items }: NavBarProps) {
+const NavBar: React.FC<NavBarProps> = ({ brandName, items }) => {
+    const isLoggedIn = useAuth();
+
     return (
-        <nav className="navbar navbar-expand-md navbar-black bg-black shadow">
-            <a className="navbar-brand" href="#">
+        <nav className="navbar navbar-expand-md navbar-light bg-light shadow">
+            <NavLink className="navbar-brand" to="/">
                 <span className="fw-bolder fs-4">{brandName}</span>
-            </a>
+            </NavLink>
             <div className="navigacio">
                 <ul>
                     {items.map((item, index) => (
-                      <li key={index}>
-                      {item === 'Home' ? (
-                          <NavLink to="/">{item}</NavLink>
-                      ) : item === 'Regisztráció' ? (
-                          <NavLink to="/regisztracio">{item}</NavLink>
-                      ) :  item === 'Keresés' ? (
-                        <NavLink to="/kereses">{item}</NavLink>
-                    ) :(
-                          <NavLink to={"/" + item.toLowerCase()}>{item}</NavLink>
-                      )}
-                  </li>
+                        <li key={index}>
+                            {item === 'Home' ? (
+                                <NavLink to="/">{item}</NavLink>
+                            ) : item === 'Keresés' ? (
+                                <NavLink to="/kereses">{item}</NavLink>
+                            ) : (item === 'Bejelentkezés' || item === 'Regisztráció') && !isLoggedIn ? (
+                                <NavLink to={`/${item.toLowerCase()}`}>{item}</NavLink>
+                            ) : null}
+                        </li>
                     ))}
                 </ul>
-                <div className="kosar">
-                    <NavLink to="/kosar"><FontAwesomeIcon icon={faShoppingBasket} /></NavLink>
-                </div>
-
-                <div className="profil">
-                    <NavLink to="/profil"><FontAwesomeIcon icon={faUser} /></NavLink>
-                </div>
-
+                {isLoggedIn && (
+                    <>
+                        <div className="kosar">
+                            <NavLink to="/kosar">
+                                <FontAwesomeIcon icon={faShoppingBasket} />
+                            </NavLink>
+                        </div>
+                        <div className="profil">
+                            <NavLink to="/profil">
+                                <FontAwesomeIcon icon={faUser} />
+                            </NavLink>
+                        </div>
+                    </>
+                )}
             </div>
-
         </nav>
     );
-}
+};
 
 export default NavBar;
