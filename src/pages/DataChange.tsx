@@ -3,31 +3,31 @@ import { useNavigate } from 'react-router-dom';
 import useAuthValid from '../auth/useAuthValid';
 import '../components/css/DataChange.css';
 
-// User típusdefiníciója
+
 interface User {
   firstName: string;
   lastName: string;
 }
 
-// ProfileChangeProps típusdefiníciója
+
 interface ProfileChangeProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-// ProfileChange komponens
+
 const ProfileChange: React.FC = () => {
-  // Auth ellenőrzése
+  
   useAuthValid();
   const navigate = useNavigate();
 
-  // Felhasználó állapota
+  
   const [user, setUser] = useState<User>({ firstName: '', lastName: '' });
 
-  // Hibák állapota
+ 
   const [error, setError] = useState<string>('');
 
-  // Felhasználó adatának lekérése
+  
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -57,13 +57,13 @@ const ProfileChange: React.FC = () => {
     fetchUserData();
   }, [navigate]);
 
-  // Input változás kezelése
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUser(prevState => ({ ...prevState, [name]: value }));
   };
 
-  // Űrlap elküldése
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -107,6 +107,7 @@ const ProfileChange: React.FC = () => {
   };
 
   return (
+    <div className='background'>
     <div className="profile-change-container">
       <h1>Profile Change</h1>
       <form onSubmit={handleSubmit}>
@@ -135,6 +136,7 @@ const ProfileChange: React.FC = () => {
         {error && <p className="error-message">{error}</p>}
         <button type="submit">Save</button>
       </form>
+    </div>
     </div>
   );
 };

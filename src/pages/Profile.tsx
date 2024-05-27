@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import '../components/css/Profile.css';
 
 interface UserData {
   lastName: string;
@@ -37,25 +38,32 @@ const App: React.FC = () => {
   const handleLogout = () => {
     setUser(null); // A felhasználói állapot törlése
     localStorage.removeItem("accessToken");
+    
     window.location.reload(); // Az oldal újratöltése
   };
   
   
 
   return (
-    <div>
+    <div className="background">
+    <div className="container">
+      <h3 className="login-title">Adatok</h3>
       {user ? (
-        <div>
+        <div className="user-info">
           <p>Last Name: {user.lastName}</p>
           <p>First Name: {user.firstName}</p>
           <p>Email: {user.email}</p>
-          <button onClick={handleLogout}>Logout</button>
-          <NavLink to="/update">Profile Update</NavLink>
+          <div className="button-container">
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
+            <NavLink className="link" to="/update">Profile Update</NavLink>
+          </div>
         </div>
       ) : (
         <p>Please log in</p>
       )}
     </div>
+  </div>
+  
   );
 }
 

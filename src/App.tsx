@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import ProfileChange from "./pages/DataChange";
 import SEARCHPAGE from './pages/searchPage';
 import PRODUCTPAGE from './pages/productPage';
+import ProductList from "./pages/productList";
 
 function App() {
   const navItems = ["Home", "Regisztráció", "Bejelentkezés", "Keresés"];
@@ -26,7 +27,8 @@ function App() {
         <Route path="/update" element={<ProfileChange />} />
         <Route path="/kereses" element={<SEARCHPAGE />} />
         <Route path="/kereses/:params" element={<SEARCHPAGE />} />
-        <Route path='/products/:productId' element={<PRODUCTPAGE />} />
+        <Route path='/product/:productId' element={<PRODUCTPAGE />} />
+        <Route path="/products/categories" element={<ProductList />} />
       </Routes>
     </Router>
   );

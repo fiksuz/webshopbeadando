@@ -42,11 +42,11 @@ const HOME: React.FC = () => {
     <h2 className="title">Termékkategóriák</h2>
     <div className="category-container">
       {categories.map((category) => (
-        <div className="category-item" key={category.id}>
+        <Link to={`/products/categories?id=${category.id}`} className="category-item" key={category.id}>
           <img src={category.image} alt={category.name} />
           <p>{category.name}</p>
           <p className="product-count">Elérhető termékek száma: {category.productCount}</p>
-        </div>
+          </Link>
       ))}
     </div>
   </div>

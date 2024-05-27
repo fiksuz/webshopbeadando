@@ -32,12 +32,8 @@ const Login: React.FC = () => {
       navigate("/profil");
       await new Promise<void>((resolve) => {
         window.location.reload();
-        
         resolve();
-        
       });
-      
-      
     } catch (error) {
       setError("Failed to log in");
     }
@@ -52,45 +48,51 @@ const Login: React.FC = () => {
   const token = localStorage.getItem("accessToken");
   if (token) {
     return (
-      <div className="login-container">
-        <h2>Bejelentkezve</h2>
-        <button onClick={handleLogout}>Kilépés</button>
+      <div className="full-page-container">
+        <div className="login-container">
+          <h2>Bejelentkezve</h2>
+          <button onClick={handleLogout}>Kilépés</button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="login-container">
-      <h2>Bejelentkezés</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label htmlFor="username">Email cím:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            autoComplete="email"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Jelszó:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            autoComplete="current-password"
-          />
-        </div>
+    <div className="custom-bg">
+      <div className="login-container">
+        <h2 className="login-title">Bejelentkezés</h2>
+        <form onSubmit={handleLogin} className="login-form">
+          <div className="form-group">
+            <label htmlFor="username" className="form-label">Email cím:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              className="form-input"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              autoComplete="email"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password" className="form-label">Jelszó:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              className="form-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              autoComplete="current-password"
+            />
+          </div>
 
-        {error && <div className="error">{error}</div>}
-        <button type="submit">Bejelentkezés</button>
-      </form>
+          {error && <div className="error-message">{error}</div>}
+          <button type="submit" className="submit-button">Bejelentkezés</button>
+        </form>
+      </div>
     </div>
   );
 };

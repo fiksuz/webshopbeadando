@@ -14,7 +14,7 @@ const NavBar: React.FC<NavBarProps> = ({ brandName, items }) => {
     const isLoggedIn = useAuth();
 
     return (
-        <nav className="navbar navbar-expand-md navbar-light bg-light shadow">
+        <nav className="navbar navbar-expand-md navbar-grey bg-grey shadow">
             <NavLink className="navbar-brand" to="/">
                 <span className="fw-bolder fs-4">{brandName}</span>
             </NavLink>

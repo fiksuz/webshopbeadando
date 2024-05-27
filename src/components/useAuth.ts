@@ -4,7 +4,7 @@ const useAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('accessToken'); // Frissítettük a tokent
+    const token = localStorage.getItem('accessToken'); 
     console.log('Token:', token);
     if (token) {
       setIsLoggedIn(true);

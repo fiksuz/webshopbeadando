@@ -95,7 +95,7 @@ const RegistrationForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+    
 
     try {
       const response = await fetch("http://localhost:5000/user", {
@@ -131,6 +131,7 @@ const RegistrationForm: React.FC = () => {
   };
 
   return (
+    <div  className="costume-bg">
     <div className="registration-container">
       <h2>Regisztráció</h2>
       <form
@@ -318,6 +319,7 @@ const RegistrationForm: React.FC = () => {
           <button type="reset">Mégsem</button>
         </div>
       </form>
+    </div>
     </div>
   );
 };

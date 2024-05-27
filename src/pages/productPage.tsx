@@ -39,7 +39,7 @@ const PRODUCTPAGE = () => {
                         <ul>
                             {productData.categories?.map((category: any) => (
                                 <li key={category}>
-                                    <Link to={'/categories/' + category}>{category}</Link>
+                                    <Link to={'/products/categories?id=' + category}>{category}</Link>
                                 </li>
                             ))}
                         </ul>

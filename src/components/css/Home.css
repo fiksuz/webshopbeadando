@@ -3,60 +3,64 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #f4f4f4; /* Szürke háttérszín */
+  background-color: #0a0601 ;
 }
 
 .title {
   font-size: 42px;
-  color: #797e77; /* Zöld szín */
+  color: #ffff; 
   width: 100%;
   text-align: center;
   padding: 20px 0;
   margin: 0 0 20px 0;
-  border-bottom: 4px solid #66b539; /* Zöld vonal a cím alatt */
+  border-bottom: 4px solid #ff6106; 
 }
 
 .category-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px; /* távolság a kategóriák között */
+  gap: 40px; 
   justify-content: center;
   max-width: 1200px;
   padding: 20px;
+
+  
 }
 
 .category-item {
-  width: calc(33.33% - 40px); /* A kategória elem szélessége: 33.33% - a távolság szélessége */
+  width: calc(33.33% - 40px); 
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Kép és szöveg középre igazítása */
+  align-items: center; 
   justify-content: center;
-  margin-bottom: 40px; /* távolság a kategóriák alatt */
+  margin-bottom: 40px; 
+  background-color: #ff6106;
+  border-radius: 20%;
 }
 
 @media (max-width: 1200px) {
   .category-item {
-    width: calc(50% - 40px); /* Kisebb képernyőknél két kategória elem férjen el egy sorban */
+    width: calc(50% - 40px); 
   }
 }
 
 @media (max-width: 768px) {
-  .category-item {
-    width: calc(100% - 40px); /* Mobil nézetben egy kategória elem teljes szélességben legyen */
+  .category-item { 
+    width: calc(100% - 40px);
   }
 }
 
 
 .category-item img {
-  width: 80%; /* A kép szélessége a konténer 80%-a */
-  height: auto; /* Automatikus magasság beállítás az arányok megtartásához */
-  border-radius: 20px; /* Kerekített sarkok */
+  width: 80%; 
+  height: auto;
+  border-radius: 20px; 
 }
 
 .category-item p {
   margin-top: 10px;
-  font-size: 16px; /* Kis szöveg méret */
-  text-align: center; /* Szöveg középre igazítása */
-  color: #646363;
+  font-size: 16px; 
+  text-align: center; 
+  color: #ffff;
 }

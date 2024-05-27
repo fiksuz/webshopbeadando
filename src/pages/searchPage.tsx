@@ -98,7 +98,7 @@ const SEARCHPAGE = () => {
     <div className='search-results-container'>
       {products.length > 0 ? (
           products.map((product) => (
-            <a key={product.id} className='product' href={"http://localhost:3000/products/" +product.id}>
+            <a key={product.id} className='product' href={'http://localhost:3000/product/' + product.id}>
               <img src={product.image} />
               <h3>{product.name}</h3>
               <p>Price: {product.price}</p>
@@ -138,7 +138,7 @@ const SEARCHPAGE = () => {
       offset,
       limit,});
 
-      const url = `http://localhost:3000/search/${requestURL}`;
+      const url = 'http://localhost:3000/search/' + requestURL;
       window.location.href = url;
   }
 
@@ -164,7 +164,7 @@ const offset = offsetParam !== null ? parseInt(offsetParam) : 0;
             offset : newOffset,
             limit,});
 
-      const url = `http://localhost:3000/search/${requestURL}`;
+      const url = 'http://localhost:3000/search/' + requestURL;
       window.location.href = url;
     }
   }
@@ -193,7 +193,7 @@ const offset = offsetParam !== null ? parseInt(offsetParam) : 0;
 
       console.log('request url: ' + requestURL);
       
-    const url = `http://localhost:3000/search/${requestURL}`;
+    const url = 'http://localhost:3000/search/' + requestURL;
     window.location.href = url;
 }
 }

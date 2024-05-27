@@ -1,3 +1,4 @@
+
 .navigacio {
     display: flex;
     justify-content: space-between;
@@ -31,7 +32,7 @@
 
 .navigacio ul li a.active,
 .navigacio ul li a:hover {
-    color: #66b539;
+    color: #ff6106;
 }
 
 .profil {
@@ -47,11 +48,11 @@
 
 .profil a,
 .kosar a {
-    color: #66b539; 
+    color: #ff6106; 
 }
 
 .navbar-brand span {
-    color: #66b539; 
-    font-size: 24px; /* vagy a kívánt méret */
-    font-weight: bold; /* ha szükséges */
+    color: #ff6106; 
+    font-size: 30px; 
+    font-weight: bold; 
 }
