@@ -1,6 +1,4 @@
 /* ProductList.css */
-
-/* Container for the product grid */
 .product-grid {
     display: flex;
     flex-wrap: wrap;

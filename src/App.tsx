@@ -25,8 +25,8 @@ function App() {
         <Route path="/profil" element={<Profile />} />
         <Route path="/" element={<Home />} />
         <Route path="/update" element={<ProfileChange />} />
-        <Route path="/kereses" element={<SEARCHPAGE />} />
-        <Route path="/kereses/:params" element={<SEARCHPAGE />} />
+        <Route path="/search" element={<SEARCHPAGE />} />
+        <Route path="/search/:params" element={<SEARCHPAGE />} />
         <Route path='/product/:productId' element={<PRODUCTPAGE />} />
         <Route path="/products/categories" element={<ProductList />} />
       </Routes>

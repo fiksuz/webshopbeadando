@@ -1,7 +1,7 @@
 /* App.css */
 
 .background {
-    background-color: #0a0601; /* Apply background color to the entire main content area */
+    background-color: #ffff; /* Apply background color to the entire main content area */
     padding: 30px 0; /* Add some padding to the main content area */
     min-height: 100vh;
   }

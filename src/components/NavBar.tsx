@@ -25,7 +25,7 @@ const NavBar: React.FC<NavBarProps> = ({ brandName, items }) => {
                             {item === 'Home' ? (
                                 <NavLink to="/">{item}</NavLink>
                             ) : item === 'Keresés' ? (
-                                <NavLink to="/kereses">{item}</NavLink>
+                                <NavLink to="/search">{item}</NavLink>
                             ) : (item === 'Bejelentkezés' || item === 'Regisztráció') && !isLoggedIn ? (
                                 <NavLink to={`/${item.toLowerCase()}`}>{item}</NavLink>
                             ) : null}

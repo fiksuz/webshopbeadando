@@ -1,5 +1,5 @@
 .costume-bg {
-  background-color:  #0a0601 ; /* Háttérszín pirosra állítva */
+  background-color:  #ffff ; /* Háttérszín pirosra állítva */
 }
 
 .registration-container {
@@ -9,6 +9,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
+  margin-top: 30px;
 }
 
 .registration-container h2 {
