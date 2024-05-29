@@ -101,21 +101,23 @@ interface Product {
                   </a>
               ))}
           </div>
-          <div className="pagination">
-              <button onClick={() => handlePageChange(offset - limit)} disabled={offset <= 0}>Előző</button>
-              {[...Array(totalPages)].map((_, index) => (
-                  <span
-                      key={index}
-                      className={`page-number ${index + 1 === currentPage ? 'active' : ''}`}
-                      onClick={() => handlePageChange(index * limit)}
-                  >
-                      {index + 1}
-                  </span>
-              ))}
-              <button onClick={() => handlePageChange(offset + limit)} disabled={offset + limit >= totalProducts}>Következő</button>
-          </div>
-      </div>
-  );
+          {totalPages > 1 && (
+                <div className="pagination">
+                    <button onClick={() => handlePageChange(offset - limit)} disabled={offset <= 0}>Előző</button>
+                    {[...Array(totalPages)].map((_, index) => (
+                        <span
+                            key={index}
+                            className={`page-number ${index + 1 === currentPage ? 'active' : ''}`}
+                            onClick={() => handlePageChange(index * limit)}
+                        >
+                            {index + 1}
+                        </span>
+                    ))}
+                    <button onClick={() => handlePageChange(offset + limit)} disabled={offset + limit >= totalProducts}>Következő</button>
+                </div>
+            )}
+        </div>
+    );
 };
   
   export default ProductList;

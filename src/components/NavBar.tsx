@@ -21,15 +21,17 @@ const NavBar: React.FC<NavBarProps> = ({ brandName, items }) => {
             <div className="navigacio">
                 <ul>
                     {items.map((item, index) => (
-                        <li key={index}>
-                            {item === 'Home' ? (
-                                <NavLink to="/">{item}</NavLink>
-                            ) : item === 'Keresés' ? (
-                                <NavLink to="/search">{item}</NavLink>
-                            ) : (item === 'Bejelentkezés' || item === 'Regisztráció') && !isLoggedIn ? (
-                                <NavLink to={`/${item.toLowerCase()}`}>{item}</NavLink>
-                            ) : null}
-                        </li>
+                       <li key={index}>
+                       {item === 'Home' ? (
+                           <NavLink to="/">{item}</NavLink>
+                       ) : item === 'Keresés' ? (
+                           <NavLink to="/search">{item}</NavLink>
+                       ) : item === 'Bejelentkezés' && !isLoggedIn ? (
+                           <NavLink to="/bejelentkezes">{item}</NavLink>
+                       ) : item === 'Regisztráció'  && !isLoggedIn ? (
+                           <NavLink to="/regisztracio">{item}</NavLink>
+                       ) : null }
+                   </li>
                     ))}
                 </ul>
                 {isLoggedIn && (

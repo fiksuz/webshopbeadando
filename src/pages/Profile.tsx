@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import '../components/css/Profile.css';
 
 interface UserData {
@@ -10,6 +10,7 @@ interface UserData {
 
 const App: React.FC = () => {
   const [user, setUser] = useState<UserData | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUser();
@@ -31,39 +32,36 @@ const App: React.FC = () => {
       const userData: UserData = await response.json();
       setUser(userData);
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.error("Felhasználói adatok lekérése hiba:", error);
     }
   };
 
   const handleLogout = () => {
-    setUser(null); // A felhasználói állapot törlése
+    setUser(null); 
     localStorage.removeItem("accessToken");
-    
-    window.location.reload(); // Az oldal újratöltése
+    navigate("/"); 
+    window.location.reload();
   };
-  
-  
 
   return (
     <div className="background">
-    <div className="container">
-      <h3 className="login-title">Adatok</h3>
-      {user ? (
-        <div className="user-info">
-          <p>Last Name: {user.lastName}</p>
-          <p>First Name: {user.firstName}</p>
-          <p>Email: {user.email}</p>
-          <div className="button-container">
-            <button className="logout-button" onClick={handleLogout}>Logout</button>
-            <NavLink className="link" to="/update">Profile Update</NavLink>
+      <div className="container">
+        <h3 className="login-title">Felhasználói adatok</h3>
+        {user ? (
+          <div className="user-info">
+            <p>Email: {user.email}</p>
+            <p>Vezetéknév: {user.lastName}</p>
+            <p>Keresztnév: {user.firstName}</p>
+            <div className="button-container">
+              <button className="logout-button" onClick={handleLogout}>Kijelentkezés</button>
+              <NavLink className="link" to="/update">Adatok módosítása</NavLink>
+            </div>
           </div>
-        </div>
-      ) : (
-        <p>Please log in</p>
-      )}
+        ) : (
+          <p>Kérjük, jelentkezzen be</p>
+        )}
+      </div>
     </div>
-  </div>
-  
   );
 }
 

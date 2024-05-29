@@ -63,3 +63,52 @@
 .billing-info.hidden {
   display: none;
 }
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Félig átlátszó fekete háttér */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.success-message {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.success-message p {
+  margin: 0;
+}
+
+.success-message button {
+  margin-top: 10px;
+}
+.success-button {
+  background-color: #ff6106; 
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+}
+
+.success-button:hover {
+  background-color: #813103; 
+}
+
+
+.login-link {
+  text-decoration: none;
+}

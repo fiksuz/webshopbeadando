@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const useAuthValid = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const validateToken = async () => {
       const token = localStorage.getItem("accessToken");
       if (!token) {
-        setIsLoggedIn(false);
+        navigate('/bejelentkezés');
         return;
       }
 
@@ -19,21 +19,17 @@ const useAuthValid = () => {
 
         if (response.status === 401) {
           localStorage.removeItem("accessToken");
-          setIsLoggedIn(false);
-        } else {
-          setIsLoggedIn(true);
+          navigate('/bejelentkezés');
         }
       } catch (err) {
         console.error("Error validating token:", err);
         localStorage.removeItem("accessToken");
-        setIsLoggedIn(false);
+        navigate('/bejelentkezés');
       }
     };
 
     validateToken();
-  }, []);
-
-  return isLoggedIn;
+  }, [navigate]);
 };
 
 export default useAuthValid;

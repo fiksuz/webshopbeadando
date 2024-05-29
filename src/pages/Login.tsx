@@ -29,7 +29,7 @@ const Login: React.FC = () => {
       console.log(data);
       localStorage.setItem("accessToken", data.accessToken);
       setIsLoggedIn(true);
-      navigate("/profil");
+      navigate("/");
       await new Promise<void>((resolve) => {
         window.location.reload();
         resolve();
